@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1,'../queue_and_stack')
+sys.path.insert(1, '../queue_and_stack')
 from dll_queue import Queue
 from dll_stack import Stack
 
@@ -23,7 +23,7 @@ class BinarySearchTree:
         if value < self.value:
             # check if current value has left child
             if self.left is None:
-            # if there is no left child, left child is equals to value
+                # if there is no left child, left child is equals to value
                 self.left = BinarySearchTree(value)
             # else repeat process (recursion)
             else:
@@ -34,7 +34,7 @@ class BinarySearchTree:
         elif value > self.value:
             # check if current value has right child
             if self.right is None:
-            # if there is no right child, right child is equals to value
+                # if there is no right child, right child is equals to value
                 self.right = BinarySearchTree(value)
             # else repeat process (recursion)
             else:
@@ -49,29 +49,27 @@ class BinarySearchTree:
             # return true
             return True
 
-        # Left case 
+        # Left case
         # check if current value is greater than target
         if self.value > target:
-            # check if current node has a left child 
+            # check if current node has a left child
             # if not return false
             if self.left is None:
                 return False
             # else repeat process
-            else: 
+            else:
                 return self.left.contains(target)
-        
 
         # Right case
         # check if current value is lesser than target
         if self.value < target:
-            # check if current node has a right child 
+            # check if current node has a right child
             # if not return false
             if self.right is None:
                 return False
             # else repeat process
             else:
                 return self.right.contains(target)
-
 
     # Return the maximum value found in the tree
     def get_max(self):
@@ -84,12 +82,9 @@ class BinarySearchTree:
         if self.right is not None:
             # check for max value
             return self.right.get_max()
-        else: 
+        else:
             # else return root
             return max_val
-
-
-
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
@@ -97,23 +92,27 @@ class BinarySearchTree:
         # Base case
         if self.value is None:
             return None
-        else: 
+        else:
             cb(self.value)
-        # Right case   
+        # Right case
         if self.right:
             self.right.for_each(cb)
-        # Left case 
+        # Left case
         if self.left:
             self.left.for_each(cb)
-        
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
-
+        if node is None:
+            return
+        else:
+            self.in_order_print(node.left)
+            print(node.value)
+            self.in_order_print(node.right)
+            
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):

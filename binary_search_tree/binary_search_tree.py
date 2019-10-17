@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../queue_and_stack')
+sys.path.insert(1,'../queue_and_stack')
 from dll_queue import Queue
 from dll_stack import Stack
 
@@ -19,29 +19,59 @@ class BinarySearchTree:
             self.value = BinarySearchTree(value)
 
         # Left case
-        # check if value is equals less than current left value
-        if value < self.left:
-            # if there is no left child, left child is equals to value
+        # check if value is less than current value
+        if value < self.value:
+            # check if current value has left child
             if self.left is None:
+            # if there is no left child, left child is equals to value
                 self.left = BinarySearchTree(value)
             # else repeat process (recursion)
             else:
                 self.left.insert(value)
 
         # Right case
-        # check if value is equals less than current right value
-        if value > self.right:
-            # if there is no right child, right child is equals to value
+        # check if value is greater than current value
+        elif value > self.value:
+            # check if current value has right child
             if self.right is None:
+            # if there is no right child, right child is equals to value
                 self.right = BinarySearchTree(value)
-        # else repeat process (recursion)
+            # else repeat process (recursion)
             else:
                 self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        # Base case
+        # if self.value = target
+        if self.value == target:
+            # return true
+            return True
+
+        # Left case 
+        # check if current value is greater than target
+        if self.value > target:
+            # check if current node has a left child 
+            # if not return false
+            if self.left is None:
+                return False
+            # else repeat process
+            else: 
+                return self.left.contains(target)
+        
+
+        # Right case
+        # check if current value is lesser than target
+        if self.value < target:
+            # check if current node has a right child 
+            # if not return false
+            if self.right is None:
+                return False
+            # else repeat process
+            else:
+                return self.right.contains(target)
+
 
     # Return the maximum value found in the tree
     def get_max(self):
